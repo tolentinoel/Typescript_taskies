@@ -1,24 +1,59 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import InputField from './components/InputField';
 
-function App() {
+// let name: string;
+// let age: number | string;
+// let isStudent: boolean;
+// let hobbies: string[];
+// let role: [number, string]; //tuple
+
+// let printName: (name: string) => void;
+// //void returns undefined, never does not return anything
+
+
+// interface Person {
+//   name: string,
+//   age: number
+// }
+
+// interface Human extends Person{
+//   profession: string;
+
+// }
+
+// type X = {
+//   name: string,
+//   age: number
+// }
+
+// type Y = X & {
+//   surname: string,
+//   birthYear: number
+// }
+
+// let human: Y = {
+//   surname: "Tolentino",
+//   birthYear: 1992,
+//   // extended type requires all properties when initialized
+//   name: 'Ellaine',
+//   age: 30
+// }
+
+// let person: Person = {
+//   name: 'Ellaine',
+//   age: 30
+// }
+
+// let lotsOfPeople: Person[];
+
+// let personInfo: unknown; //recommended instead of using any
+
+const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <span className="heading"> TASKIES </span>
+      <InputField/>
     </div>
   );
 }
