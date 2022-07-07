@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import InputField from './components/InputField';
+import { Todo } from './model';
 
 // let name: string;
 // let age: number | string;
@@ -49,12 +50,25 @@ import InputField from './components/InputField';
 
 const App: React.FC = () => {
 
-  const [toDo, setToDo] = useState('');
+  const [todo, setToDo] = useState<string>('');
+  const [todos, setToDos] = useState<Todo[]>([]);
+
+  const handleAdd = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (todo) {
+      setToDos([...todos, {id: Date.now(), todo , isDone: false}])
+
+    }
+    setToDo("");
+  };
   
   return (
     <div className="App">
       <span className="heading"> TASKIES </span>
-      <InputField/>
+      <InputField todo={todo} setToDo= {setToDo} handleAdd={handleAdd}/>
+      {todos.map(task => (
+        <li>{task.todo}</li>
+      ))}
     </div>
   );
 }
