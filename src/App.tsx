@@ -10,8 +10,6 @@ import InputField from './components/InputField';
 
 // let printName: (name: string) => void;
 // //void returns undefined, never does not return anything
-
-
 // interface Person {
 //   name: string,
 //   age: number
@@ -50,6 +48,9 @@ import InputField from './components/InputField';
 // let personInfo: unknown; //recommended instead of using any
 
 const App: React.FC = () => {
+
+  const [toDo, setToDo] = useState('');
+  
   return (
     <div className="App">
       <span className="heading"> TASKIES </span>
