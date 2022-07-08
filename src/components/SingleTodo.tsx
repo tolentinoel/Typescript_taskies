@@ -11,7 +11,9 @@ type Props = {
 }
 
 const SingleTodo = ({todo, todos, setToDos}: Props) => {
-  return <form>{todo.todo} <BiEditAlt/> </form> //47:17
+  return <form className="todosSingle">
+            <span className="todosSingleText"> {todo.todo} <BiEditAlt/> </span>
+        </form> 
 
 }
 
