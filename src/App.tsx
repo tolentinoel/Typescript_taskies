@@ -68,9 +68,9 @@ const App: React.FC = () => {
       <span className="heading"> TASKIES </span>
       <InputField todo={todo} setToDo= {setToDo} handleAdd={handleAdd}/>
       <ToDoList todos={todos} setToDos= {setToDos}/>
-      {todos.map(task => (
+      {/* {todos.map(task => (
         <li>{task.todo}</li>
-      ))}
+      ))} */}
     </div>
   );
 }
