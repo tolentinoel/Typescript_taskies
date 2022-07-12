@@ -46,7 +46,7 @@ const SingleTodo = ({todo, todos, setToDos}: Props) => {
     }
 
     const inputRef = useRef<HTMLInputElement>(null);
-// puts the cursor back in the input element if edit state is true
+    // puts the cursor back in the input element if edit state is true
     useEffect(() => {
         if(edit){
             inputRef.current?.focus();
@@ -54,9 +54,8 @@ const SingleTodo = ({todo, todos, setToDos}: Props) => {
     }, [edit])
 
 
-    //determines how each task would be rendered,
-
-  return <form className="todosSingle" onSubmit={(e) => handleEdit(e, todo.id)}>
+    // determines how each task would be rendered,
+    return <form className="todosSingle" onSubmit={(e) => handleEdit(e, todo.id)}>
         {edit ? (
             <input
                 ref={inputRef}
@@ -79,8 +78,8 @@ const SingleTodo = ({todo, todos, setToDos}: Props) => {
                             if (!edit && !todo.isDone){
                                 setEdit(!edit)
                             }
-                        }}
-                    ><BiEditAlt/>
+                        }}>
+                    <BiEditAlt/>
                 </span>
                 <span className="icon" onClick={() => handleDelete(todo.id)}><RiDeleteBin5Line/></span>
                 <span className="icon" onClick={() => handleDone(todo.id)}>

@@ -19,7 +19,7 @@ const ToDoList: React.FC<Props> = ({todos, setToDos}: Props) => {
                 todos={todos}
                 setToDos={setToDos}
             />
-            // <li>{todo.todo}</li>
+
         ))}
     </div>
   )
