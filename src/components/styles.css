@@ -2,7 +2,7 @@
 .input {
     font-family: 'Raleway', sans-serif;
     display: flex;
-    width: 90%;
+    width: 95%;
     position: relative; 
     /* parent element needs to be relative to keep child abolute */
     align-items: center;
@@ -47,6 +47,14 @@
 .inputSubmit:active {
     transform: scale(0.6);
     box-shadow: 0 0 5px black;
+}
+
+.container {
+    display: flex;
+    width: 95%;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .todos {

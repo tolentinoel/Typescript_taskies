@@ -9,9 +9,9 @@ interface Props{
     todos: Todo[],
     setToDos: React.Dispatch<React.SetStateAction<Todo[]>>,
 }
-const ToDoList: React.FC<Props> = ({todos, setToDos}: Props) => {
-  return (
-    <div className="todos">
+
+// eslint-disable-next-line no-lone-blocks
+{/* <div className="todos">
         {todos.map(todo => (
             <SingleTodo
                 todo={todo}
@@ -21,6 +21,33 @@ const ToDoList: React.FC<Props> = ({todos, setToDos}: Props) => {
             />
 
         ))}
+    </div> */}
+const ToDoList: React.FC<Props> = ({todos, setToDos}: Props) => {
+  return (
+    <div className="container">
+      <div className="todos">
+        <span className="todosHeading">
+          Active Task
+        </span>
+        {todos.map(todo => (
+            <SingleTodo
+                todo={todo}
+                key={todo.id}
+                todos={todos}
+                setToDos={setToDos}
+            />
+
+        ))}
+      </div>
+      <div className="todos remove">{todos.map(todo => (
+            <SingleTodo
+                todo={todo}
+                key={todo.id}
+                todos={todos}
+                setToDos={setToDos}
+            />
+
+        ))}</div>
     </div>
   )
 }

@@ -64,15 +64,13 @@ const App: React.FC = () => {
     }
     setToDo("");
   };
-  
+
   return (
     <div className="App">
       <span className="heading"> TASKIES </span>
       <InputField todo={todo} setToDo= {setToDo} handleAdd={handleAdd}/>
       <ToDoList todos={todos} setToDos= {setToDos}/>
-      {/* {todos.map(task => (
-        <li>{task.todo}</li>
-      ))} */}
+
     </div>
   );
 }
