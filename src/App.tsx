@@ -2,6 +2,11 @@ import './App.css';
 
 import React, { useState } from 'react';
 
+import {
+  DragDropContext,
+  DropResult,
+} from 'react-beautiful-dnd';
+
 import InputField from './components/InputField';
 import ToDoList from './components/ToDoList';
 import { Todo } from './model';
@@ -52,7 +57,7 @@ import { Todo } from './model';
 // let personInfo: unknown; //recommended instead of using any
 
 const App: React.FC = () => {
-
+  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
   const [todo, setToDo] = useState<string>('');
   const [todos, setToDos] = useState<Todo[]>([]);
 
@@ -65,14 +70,52 @@ const App: React.FC = () => {
     setToDo("");
   };
 
-  return (
-    <div className="App">
-      <span className="heading"> TASKIES </span>
-      <InputField todo={todo} setToDo= {setToDo} handleAdd={handleAdd}/>
-      <ToDoList todos={todos} setToDos= {setToDos}/>
+  const onDragEnd = (result:DropResult) => {
+    const {source, destination} = result;
 
-    </div>
+    if (!destination) {
+      return
+    }
+
+    if (destination.droppableId === source.droppableId && destination.index == source.index) return;
+    let add,
+    active = todos,
+    complete = completedTodos;
+
+    if(source.droppableId === 'TodosList') {
+      add = active[source.index];
+      active.splice(source.index, 1);
+    } else {
+      add = complete[source.index];
+      complete.splice(source.index, 1);
+    }
+
+    if(destination.droppableId === 'TodosList') {
+      active.splice(destination.index, 0, add);
+    } else {
+      complete.splice(destination.index, 0, add);
+    }
+
+    setCompletedTodos(complete);
+    setToDos(active);
+  }
+
+
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="App">
+        <span className="heading"> TASKIES </span>
+        <InputField todo={todo} setToDo= {setToDo} handleAdd={handleAdd}/>
+        <ToDoList
+          completedTodos={completedTodos}
+          setCompletedTodos={setCompletedTodos}
+          todos={todos}
+          setToDos= {setToDos}
+        />
+      </div>
+    </DragDropContext>
   );
 }
 
 export default App;
+

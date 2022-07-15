@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 
+import { Draggable } from 'react-beautiful-dnd';
 import { BiEditAlt } from 'react-icons/bi';
 import {
   MdDone,
@@ -17,12 +18,14 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 import { Todo } from '../model';
 
 type Props = {
+    index: number,
     todo: Todo,
     todos: Todo[],
     setToDos: React.Dispatch<React.SetStateAction<Todo[]>>,
+    isDone?: boolean,
 }
 
-const SingleTodo = ({todo, todos, setToDos}: Props) => {
+const SingleTodo = ({index, todo, todos, setToDos, isDone}: Props) => {
 
     const [edit, setEdit] = useState<boolean>(false);
     const [editTodo, setEditTodo] = useState<string>(todo.todo);
@@ -54,45 +57,58 @@ const SingleTodo = ({todo, todos, setToDos}: Props) => {
     }, [edit])
 
 
-    // determines how each task would be rendered,
-    return <form className="todosSingle" onSubmit={(e) => handleEdit(e, todo.id)}>
-        {edit ? (
-            <input
-                ref={inputRef}
-                type="text"
-                className="todosSingleText"
-                value={editTodo}
-                onChange={(e) => setEditTodo(e.target.value)}
-            />
-            ) : (todo.isDone ? (
-            <s className="todosSingleText"> {todo.todo} </s>
-            ) : (
-            <span className="todosSingleText"> {todo.todo} </span>
-            ))
-        }
 
-            <div>
-                <span className="icon"
-                        onClick={() => {
-                            //prevents you to edit a task that's already been crossed out.
-                            if (!edit && !todo.isDone){
-                                setEdit(!edit)
+    return (
+        <Draggable draggableId={todo.id.toString()} index={index}>
+            {
+                (provided, snapshot) => (
+                    <form className={`todosSingle ${snapshot.draggingOver ? 'drag': ""}`}
+                        onSubmit={(e) => handleEdit(e, todo.id)}
+                        {...provided.dragHandleProps}
+                        {...provided.draggableProps}
+                        ref={provided.innerRef}
+                        >
+                        {edit ? (
+                            <input
+                                ref={inputRef}
+                                className="todosSingleText"
+                                value={editTodo}
+                                onChange={(e) => setEditTodo(e.target.value)}
+                            />
+                            ) : (todo.isDone ? (
+                            <s className="todosSingleText"> {todo.todo} </s>
+                            ) : (
+                            <span className="todosSingleText"> {todo.todo} </span>
+                            ))
+                        }
+
+                        <div>
+                            <span className="icon"
+                                    onClick={() => {
+                                        //prevents you to edit a task that's already been crossed out.
+                                        if (!edit && !todo.isDone){
+                                            setEdit(!edit)
+                                        }
+                                    }}>
+                                <BiEditAlt/>
+                            </span>
+                            <span className="icon" onClick={() => handleDelete(todo.id)}><RiDeleteBin5Line/></span>
+                            <span className="icon" onClick={() => handleDone(todo.id)}>
+                            {
+                                todo.isDone ? (
+                                    <MdDone/>
+                                ) : (
+                                    <MdDoneOutline/>
+                                )
                             }
-                        }}>
-                    <BiEditAlt/>
-                </span>
-                <span className="icon" onClick={() => handleDelete(todo.id)}><RiDeleteBin5Line/></span>
-                <span className="icon" onClick={() => handleDone(todo.id)}>
-                {
-                    todo.isDone ? (
-                        <MdDone/>
-                    ) : (
-                        <MdDoneOutline/>
-                    )
-                }
-                </span>
-            </div>
-        </form>
+                            </span>
+                        </div>
+                    </form>
+                )
+            }
+        </Draggable>
+    )
+
 
 }
 
