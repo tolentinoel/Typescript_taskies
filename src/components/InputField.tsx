@@ -13,7 +13,7 @@ const InputField = ({todo, setToDo, handleAdd}: Props) => {
 
     return <form className= "input" onSubmit={(e) => {
                 handleAdd(e);
-                inputRef.current?.focus();
+                inputRef.current?.blur();
                 }}>
                 <input
                     ref={inputRef}
