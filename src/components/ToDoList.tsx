@@ -14,14 +14,14 @@ interface Props{
     setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
 }
 
-const ToDoList: React.FC<Props> = ({
+export const ToDoList: React.FC<Props> = ({
   todos,
   setToDos,
   completedTodos,
   setCompletedTodos
   }: Props) => {
   return (
-    <div className="container">
+    <div className="container" data-testid='todolist-container'>
       <Droppable droppableId='TodosList'>
         {
           (provided,snapshot) => (
@@ -71,7 +71,7 @@ const ToDoList: React.FC<Props> = ({
             </div>
           )}
       </Droppable>
-      </div>
+    </div>
   )
 }
 
