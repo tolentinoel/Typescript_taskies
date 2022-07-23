@@ -77,7 +77,7 @@ const App: React.FC = () => {
       return
     }
 
-    if (destination.droppableId === source.droppableId && destination.index == source.index) return;
+    if (destination.droppableId === source.droppableId && destination.index === source.index) return;
     let add,
     active = todos,
     complete = completedTodos;

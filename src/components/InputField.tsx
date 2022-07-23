@@ -3,7 +3,7 @@ import './styles.css';
 import React, { useRef } from 'react';
 
 interface Props {
-    todo: string,
+    todo: string,   
     setToDo: React.Dispatch<React.SetStateAction<string>>;
     handleAdd: (e: React.FormEvent) => void;
 }
@@ -22,8 +22,9 @@ const InputField = ({todo, setToDo, handleAdd}: Props) => {
                     type='input'
                     placeholder="Enter task"
                     className="inputBox"
+                    aria-label='task-input'
                 />
-                <button className="inputSubmit" type="submit">Go</button>
+                <button className="inputSubmit" type="submit" aria-label='submit-button'>Go</button>
             </form>
 
 }
